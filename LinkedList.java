@@ -68,6 +68,37 @@ class Linked {
     return node;
   }
 
+  //Delete largest element
+  public Node deleteLargestElement(Node node) {
+    if(node == null || node.next == null) {
+      return null;
+    }
+    
+    Node prevLargest, largest, head, prev; 
+    head = largest = node;
+    prevLargest = null;
+    prev = node;
+    node = node.next;
+    
+    while(node != null) {
+      if(node.data > largest.data) {
+        prevLargest = prev;
+        largest = node;
+      }
+      
+      prev = node;
+      node = node.next;
+    }
+    
+    if(head == largest) {
+      head = head.next;
+    } else {
+      prevLargest.next = largest.next;
+    }
+    
+    return head;
+  }
+
 
   // Getting Size
 
@@ -309,6 +340,10 @@ public class LinkedList {
     System.out.println("Sorting LinkedList: ");
     a.printList(sorted);
     System.out.println();
+    
+    root=a.deleteLargestElement(root);
+    System.out.println("Delete Largest Element LinkedList: ");
+    a.printList(root);
 
   }
 }
